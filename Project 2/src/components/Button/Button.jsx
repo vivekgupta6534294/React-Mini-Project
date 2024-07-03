@@ -4,9 +4,9 @@ import styles from './Button.module.css'
 
 const Button = (props) => {
     // console.log(props)
-    const{isOutline,icon,text}=props;// destructuring
+    const{isOutline,icon,text,...rest}=props;// destructuring
   return (
-    <button className={isOutline?styles.outline_btn:styles.primary_btn}>
+    <button {...rest} className={isOutline?styles.outline_btn:styles.primary_btn}>
         {icon}
         {text}
     </button>
