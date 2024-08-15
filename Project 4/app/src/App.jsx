@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 const App = () => {
   return (
-    <MainContainer>
+    <Container>
       <TopContainer>
         <div>
           <img src="/logo.svg" alt="" />
@@ -13,12 +13,35 @@ const App = () => {
         
 
       </TopContainer>
-    </MainContainer>
+    </Container>
   );
 };
 
 export default App;
 
-const MainContainer = styled.div`
-background-color: #323334`;
-const TopContainer =styled.section``;
+const Container = styled.div`
+max-width:1200px;
+margin: 0 auto;
+`;
+
+const TopContainer =styled.section`
+min-height:140px ;
+display:flex;
+justify-content: space-between;
+padding: 60px;
+align-items: center;
+
+
+.search{
+  input{
+    background-color: transparent;
+    border: 1px solid red;
+    color: white;
+    border-radius: 5px;
+    height: 40px;
+    font-size: 16px;
+    padding: 0 10px;
+
+  }
+}
+`;
