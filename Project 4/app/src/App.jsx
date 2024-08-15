@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components"
+import SearchResult from "./components/SearchResult";
 
-const BASE_URL="http://localhost:9000/";
+export const BASE_URL="http://localhost:9000";
 
 const App = () => {
 
@@ -33,15 +34,16 @@ useEffect(()=>{
 
 console.log(data);
 
-const temp=[
-  {
-      "name": "Boilded Egg",
-      "price": 10,
-      "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
-      "image": "/images/egg.png",
-      "type": "breakfast"
-  }
-];
+// const temp=[
+//   {
+//       "name": "Boilded Egg",
+//       "price": 10,
+//       "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+//       "image": "/images/egg.png",
+//       "type": "breakfast"
+//   }
+// ];
+
 if(error){
   return <div>{error}</div>
 }
@@ -67,12 +69,9 @@ if(loading) return <div>loading....</div>
 
       </FilterContainer>
 
-      <FoodCardContainer>
-        <FoodCards>
+      <SearchResult data ={data}/>
 
-        </FoodCards>
-
-      </FoodCardContainer>
+      
     </Container>
   );
 };
@@ -114,7 +113,7 @@ padding-bottom: 30px;
 
 `;
 
-const Button=styled.button`
+export const Button=styled.button`
 background-color:#ff4343;
 color: white;
 border:none;
@@ -124,9 +123,4 @@ padding: 6px 12px;
 
 `;
 
-const FoodCardContainer=styled.section`
-background-image: url("/bg.png");
-background-size:cover;
-height: calc(100vh - 220px );
-`;
-const FoodCards =styled.div``;
+
