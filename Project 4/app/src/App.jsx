@@ -10,6 +10,8 @@ const[data,setData]=useState(null);
 const [loading,setLoading]=useState(false);
 const [error,setError]=useState(null);
 
+const [filteredData,setFilteredData]=useState(null);
+
 
 useEffect(()=>{
   const fetchFoodData =async ()=>{
@@ -21,6 +23,7 @@ useEffect(()=>{
       const json=await response.json();
   
       setData(json);
+      setFilteredData(json);
       setLoading(false);
   }catch(error){
     setError("Unable to fetch data");
@@ -44,6 +47,16 @@ console.log(data);
 //   }
 // ];
 
+const searchFood=(e)=>{
+  const searchValue=e.target.value;
+  console.log(searchValue);
+  if(searchValue===""){
+    setFilteredData(null);
+  }
+  const filter=data?.filter((food)=>food.name.toLowerCase().includes(searchValue.toLowerCase()));
+  setFilteredData(filter);
+}
+
 if(error){
   return <div>{error}</div>
 }
@@ -56,7 +69,7 @@ if(loading) return <div>loading....</div>
           <img src="/logo.svg" alt="" />
         </div>
         <div className="search">
-          <input type="text" placeholder="Search Food "/>
+          <input  onChange={searchFood}type="text" placeholder="Search Food "/>
         </div>
         
 
@@ -74,7 +87,7 @@ if(loading) return <div>loading....</div>
 
       
     </Container>
-    <SearchResult data ={data}/>
+    <SearchResult data ={filteredData}/>
     </>
     
   );
