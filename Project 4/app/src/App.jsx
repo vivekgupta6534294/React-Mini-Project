@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components"
 
 const BASE_URL="http://localhost:9000/";
@@ -7,22 +7,45 @@ const App = () => {
 
 const[data,setData]=useState(null);
 const [loading,setLoading]=useState(false);
-const fetchFoodData =async ()=>{
-  // Network Call 
-  try{
-    const response =await fetch(BASE_URL);
-                                              // Whatever response is coming we have to convert it into json 
-    const json=await response.json();
+const [error,setError]=useState(null);
 
-    // setData(json);
-}catch(error){
 
- }
+useEffect(()=>{
+  const fetchFoodData =async ()=>{
+    // Network Call 
+    setLoading(true);
+    try{
+      const response =await fetch(BASE_URL);
+                                                // Whatever response is coming we have to convert it into json 
+      const json=await response.json();
   
-  // console.log(json);
-}
+      setData(json);
+      setLoading(false);
+  }catch(error){
+    setError("Unable to fetch data");
+  
+   }  
+    // console.log(json);
+  }
+  fetchFoodData();
 
-fetchFoodData();
+},[]);
+
+console.log(data);
+
+const temp=[
+  {
+      "name": "Boilded Egg",
+      "price": 10,
+      "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.",
+      "image": "/images/egg.png",
+      "type": "breakfast"
+  }
+];
+if(error){
+  return <div>{error}</div>
+}
+if(loading) return <div>loading....</div>
   return (
     <Container>
       <TopContainer>
