@@ -13,6 +13,14 @@ const App = () => {
         
 
       </TopContainer>
+
+      <FilterContainer>
+        <Button>All</Button>
+        <Button>Breakfast</Button>
+        <Button>Lunch</Button>
+        <Button>Dinner</Button>
+
+      </FilterContainer>
     </Container>
   );
 };
@@ -44,4 +52,21 @@ align-items: center;
 
   }
 }
+`;
+
+const FilterContainer=styled.section`
+display: flex;
+justify-content: center;
+gap:12px;
+
+`;
+
+const Button=styled.button`
+background-color:#ff4343;
+color: white;
+border:none;
+
+border: 5px;
+padding: 6px 12px;
+
 `;
