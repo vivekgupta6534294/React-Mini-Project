@@ -11,6 +11,7 @@ const [loading,setLoading]=useState(false);
 const [error,setError]=useState(null);
 
 const [filteredData,setFilteredData]=useState(null);
+const [selectedButton,setSelectedButton]=useState("all");
 
 
 useEffect(()=>{
@@ -57,6 +58,41 @@ const searchFood=(e)=>{
   setFilteredData(filter);
 }
 
+const filterFood=(type)=>{
+  if(type==="all"){
+    setFilteredData(data);
+    setSelectedButton("all");
+    return;
+  }
+
+  const filter=data?.filter((food)=>food.type.toLowerCase().includes(type.toLowerCase()));
+  setFilteredData(filter);
+  setSelectedButton(type);
+  
+}
+const filterBtns=[
+  {
+    name:"All",
+    type:"all",
+
+  },
+  {
+    name:"Breakfast",
+    type:"breakfast",
+
+  },
+  {
+    name:"Lunch",
+    type:"lunch",
+
+  },
+  {
+    name:"Dinner",
+    type:"dinner",
+
+  },
+];
+
 if(error){
   return <div>{error}</div>
 }
@@ -76,10 +112,12 @@ if(loading) return <div>loading....</div>
       </TopContainer>
 
       <FilterContainer>
-        <Button>All</Button>
-        <Button>Breakfast</Button>
-        <Button>Lunch</Button>
-        <Button>Dinner</Button>
+        {
+          filterBtns.map((value)=>
+            <Button key={value.name} onClick={()=>filterFood(value.type)}>{value.name}</Button>
+          )
+        }
+
 
       </FilterContainer>
 
@@ -137,6 +175,10 @@ border:none;
 
 border: 5px;
 padding: 6px 12px;
+cursor: pointer;
+&:hover{
+  background-color: darkred;
+}
 
 `;
 
