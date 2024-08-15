@@ -49,6 +49,7 @@ if(error){
 }
 if(loading) return <div>loading....</div>
   return (
+    <>
     <Container>
       <TopContainer>
         <div>
@@ -69,16 +70,19 @@ if(loading) return <div>loading....</div>
 
       </FilterContainer>
 
-      <SearchResult data ={data}/>
+      
 
       
     </Container>
+    <SearchResult data ={data}/>
+    </>
+    
   );
 };
 
 export default App;
 
-const Container = styled.div`
+export const Container = styled.div`
 max-width:1200px;
 margin: 0 auto;
 `;
