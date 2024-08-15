@@ -114,7 +114,11 @@ if(loading) return <div>loading....</div>
       <FilterContainer>
         {
           filterBtns.map((value)=>
-            <Button key={value.name} onClick={()=>filterFood(value.type)}>{value.name}</Button>
+            <Button
+
+          isSelected={selectedButton===value.type}
+          
+          key={value.name} onClick={()=>filterFood(value.type)}>{value.name}</Button>
           )
         }
 
@@ -139,7 +143,7 @@ margin: 0 auto;
 `;
 
 const TopContainer =styled.section`
-min-height:140px ;
+height:140px ;
 display:flex;
 justify-content: space-between;
 padding: 60px;
@@ -158,6 +162,12 @@ align-items: center;
 
   }
 }
+
+@media (0<width<600px){
+  flex-direction: column;
+  height: 140px;
+
+}
 `;
 
 const FilterContainer=styled.section`
@@ -169,7 +179,8 @@ padding-bottom: 30px;
 `;
 
 export const Button=styled.button`
-background-color:#ff4343;
+background-color:${({isSelected})=>(isSelected?"#480e0a": "#ff4343")};
+outline:1px solid ${({isSelected})=>(isSelected?"white": "#ff4343")};
 color: white;
 border:none;
 
